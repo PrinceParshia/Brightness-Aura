@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "brightness-aura",
+	"version": "${version}",
+	"name": "Brightness Aura",
+	"description": "Bright The World! (Client-Side Night Vision)",
+	"authors": [
+		"PrinceParshia, Creatomat"
+	],
+	"contact": {
+		"discord": "https://discord.gg/rK5RbYS9Bm"
+	},
+	"license": "All Rights Reserved",
+	"icon": "brightness-aura.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"cre8to.princ.brightness.BrightnessAura"
+		]
+	},
+	"mixins": [
+		"brightness-aura.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.0",
+		"minecraft": "~1.21",
+		"java": ">=17",
+		"fabric-api": ">=0.102.0+1.21"
+	}
+}
