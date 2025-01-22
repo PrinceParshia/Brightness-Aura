@@ -1,4 +1,4 @@
-package cre8to.princ.brightness;
+package cre8to.princ.brightness.aura;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -27,7 +27,7 @@ public class BrightnessAura implements ClientModInitializer {
 				if (isBrightnessMax) {
 					client.player.removeStatusEffect(StatusEffects.NIGHT_VISION);
 				} else {
-					client.player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false));
+					client.player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false, false));
 				}
 				isBrightnessMax = !isBrightnessMax;
 			}

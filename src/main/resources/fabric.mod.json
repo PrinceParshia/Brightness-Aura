@@ -15,7 +15,7 @@
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"cre8to.princ.brightness.BrightnessAura"
+			"cre8to.princ.brightness.aura.BrightnessAura"
 		]
 	},
 	"mixins": [
@@ -23,8 +23,8 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.16.0",
-		"minecraft": "~1.21.3",
+		"minecraft": "~1.21",
 		"java": ">=17",
-		"fabric-api": ">=0.114.3+1.21.4"
+		"fabric-api": ">=0.102.0+1.21"
 	}
 }
