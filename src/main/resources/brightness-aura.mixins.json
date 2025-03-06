@@ -3,6 +3,8 @@
 	"package": "cre8to.princ.brightness.aura.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"UnitDoubleMixin",
+		"OptionsMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
