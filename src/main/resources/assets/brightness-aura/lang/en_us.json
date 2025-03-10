@@ -1,5 +1,4 @@
 {
-  "category.brightness-aura": "Brightness Aura",
-  "key.brightness-aura.brightness-key": "Toggle Max Brightness",
-  "options.gamma.ultra": "Full Bright"
+  "key.categories.aura": "Brightness Aura",
+  "key.brightness.aura": "Toggle Max Brightness"
 }
