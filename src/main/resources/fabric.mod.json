@@ -5,7 +5,7 @@
 	"name": "Brightness Aura",
 	"description": "Provides a client-side night vision effect for better visibility in dark areas, enhancing the Minecraft experience without requiring potions.",
 	"authors": [
-		"PrinceParshia, Creatomat"
+		"PrinceParshia"
 	],
 	"contact": {
 		"discord": "https://discord.gg/rK5RbYS9Bm"
@@ -15,7 +15,7 @@
 	"environment": "client",
 	"entrypoints": {
 		"client": [
-			"cre8to.princ.brightness.aura.BrightnessAura"
+			"princ.brightaura.BrightnessAura"
 		]
 	},
 	"mixins": [

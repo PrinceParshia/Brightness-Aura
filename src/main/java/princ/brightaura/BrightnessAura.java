@@ -1,4 +1,4 @@
-package cre8to.princ.brightness.aura;
+package princ.brightaura;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
@@ -14,22 +14,23 @@ public class BrightnessAura implements ClientModInitializer {
 	private static double originalGamma = 0.5;
 	private static final double maxGamma = 15.0;
 	private static final int delay = 20;
-	private double targetGamma = 0.5;
-	private boolean transition = false;
-	private double stepSize;
-	private int stepsRemaining;
-	private boolean wasKeyPressed = false;
+	private static double targetGamma = 0.5;
+	private static boolean transition = false;
+	private static double stepSize;
+	private static int stepsRemaining;
+	private static boolean wasKeyPressed = false;
 
-	private static final KeyMapping brightnessAuraKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
-					"key.brightness.aura",
-					InputConstants.Type.KEYSYM,
-					GLFW.GLFW_KEY_B,
-					"key.categories.aura"
-			)
+	public static final KeyMapping brightnessAuraKey = new KeyMapping(
+			"key.brightness.aura",
+			InputConstants.Type.KEYSYM,
+			GLFW.GLFW_KEY_B,
+			"key.categories.aura"
 	);
 
 	@Override
 	public void onInitializeClient() {
+		KeyBindingHelper.registerKeyBinding(brightnessAuraKey);
+
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if (brightnessAuraKey.isDown() && !wasKeyPressed) {
 				if (!transition) {
