@@ -1,4 +1,5 @@
 {
-  "key.categories.aura": "Brightness Aura",
-  "key.brightness.aura": "Toggle Max Brightness"
+  "key.categories.brightaura": "Brightness Aura",
+  "key.brightness.aura": "Toggle Max Brightness",
+  "key.nightvision.aura": "Toggle Max Brightness"
 }

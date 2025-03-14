@@ -11,53 +11,61 @@ import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
 public class BrightnessAura implements ClientModInitializer {
-	private static double originalGamma = 0.5;
-	private static final double maxGamma = 15.0;
-	private static final int delay = 20;
-	private static double targetGamma = 0.5;
-	private static boolean transition = false;
-	private static double stepSize;
-	private static int stepsRemaining;
-	private static boolean wasKeyPressed = false;
+	public static final String KATEGORY = "key.categories.brightaura";
 
 	public static final KeyMapping brightnessAuraKey = new KeyMapping(
 			"key.brightness.aura",
 			InputConstants.Type.KEYSYM,
 			GLFW.GLFW_KEY_B,
-			"key.categories.aura"
+			KATEGORY
 	);
 
 	@Override
 	public void onInitializeClient() {
+		registerBrightnessAuraKey();
+	}
+
+	private double originalGamma;
+	public static final double maxGamma = 15.0;
+	private int delay;
+	private double targetGamma;
+	private double stepSize;
+	private boolean execTransition = false;
+
+	public static boolean wasBrightnessAuraKeyPressed = false;
+
+	private void registerBrightnessAuraKey() {
 		KeyBindingHelper.registerKeyBinding(brightnessAuraKey);
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
-			if (brightnessAuraKey.isDown() && !wasKeyPressed) {
-				if (!transition) {
+			if (brightnessAuraKey.isDown() && !wasBrightnessAuraKeyPressed) {
+				if (!execTransition) {
 					if (client.options.gamma().get() != maxGamma) {
 						originalGamma = client.options.gamma().get();
 						targetGamma = maxGamma;
 					} else {
 						targetGamma = originalGamma;
 					}
-					stepsRemaining = delay;
-					stepSize = (targetGamma - client.options.gamma().get()) / stepsRemaining;
-					transition = true;
+
+					delay = 20;
+					stepSize = (targetGamma - client.options.gamma().get()) / delay;
+					execTransition = true;
 				}
 			}
 
-			if (transition) {
-				if (stepsRemaining <= 0) {
+			if (execTransition) {
+				if (delay <= 0) {
 					client.options.gamma().set(targetGamma);
-					transition = false;
+					execTransition = false;
 				} else {
-					double currentGamma = client.options.gamma().get();
-					client.options.gamma().set(currentGamma + stepSize);
-					stepsRemaining--;
+					double newGamma = client.options.gamma().get() + stepSize;
+					newGamma = Math.max(0.0, Math.min(maxGamma, newGamma));
+					client.options.gamma().set(newGamma);
+					delay--;
 				}
 			}
 
-			wasKeyPressed = brightnessAuraKey.isDown();
+			wasBrightnessAuraKeyPressed = brightnessAuraKey.isDown();
 		});
 	}
 }

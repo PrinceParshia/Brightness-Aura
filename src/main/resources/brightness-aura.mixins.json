@@ -1,9 +1,10 @@
 {
-	"required": true,
+	"required": false,
 	"package": "princ.brightaura.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"OptionInstanceMixin"
+		"UnitDoubleMixin",
+		"SliderControlMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
