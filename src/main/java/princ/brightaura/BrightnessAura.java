@@ -7,65 +7,75 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.util.Mth;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
 public class BrightnessAura implements ClientModInitializer {
-	public static final String KATEGORY = "key.categories.brightaura";
+	public static final String CATEGORY = "key.categories.brightaura";
 
 	public static final KeyMapping brightnessAuraKey = new KeyMapping(
 			"key.brightness.aura",
 			InputConstants.Type.KEYSYM,
 			GLFW.GLFW_KEY_B,
-			KATEGORY
+			CATEGORY
+	);
+
+	public static final KeyMapping nightVisionKey = new KeyMapping(
+			"key.night.vision",
+			InputConstants.Type.KEYSYM,
+			GLFW.GLFW_KEY_N,
+			CATEGORY
 	);
 
 	@Override
 	public void onInitializeClient() {
 		registerBrightnessAuraKey();
+		registerNightVisionKey();
 	}
 
-	private double originalGamma;
-	public static final double maxGamma = 15.0;
-	private int delay;
+	public static final double MAX_GAMMA = 15.0, MIN_GAMMA = 0.0;
+	public static final double GAMMA_SLIDER_INTERVAL = 0.01;
+	private final int DEFAULT_GAMMA_TRANSITION_TIME = 20;
+	private int GAMMA_TRANSITION_TIME;
+	private double prevGamma;
 	private double targetGamma;
-	private double stepSize;
-	private boolean execTransition = false;
-
-	public static boolean wasBrightnessAuraKeyPressed = false;
+	private boolean execGammaTransition;
 
 	private void registerBrightnessAuraKey() {
 		KeyBindingHelper.registerKeyBinding(brightnessAuraKey);
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
-			if (brightnessAuraKey.isDown() && !wasBrightnessAuraKeyPressed) {
-				if (!execTransition) {
-					if (client.options.gamma().get() != maxGamma) {
-						originalGamma = client.options.gamma().get();
-						targetGamma = maxGamma;
-					} else {
-						targetGamma = originalGamma;
-					}
-
-					delay = 20;
-					stepSize = (targetGamma - client.options.gamma().get()) / delay;
-					execTransition = true;
+			if (brightnessAuraKey.consumeClick()) {
+				if (!execGammaTransition) {
+					targetGamma = (client.options.gamma().get() != MAX_GAMMA) ? MAX_GAMMA : prevGamma;
+					if (targetGamma == MAX_GAMMA) prevGamma = client.options.gamma().get();
+					GAMMA_TRANSITION_TIME = DEFAULT_GAMMA_TRANSITION_TIME;
+					execGammaTransition = true;
 				}
 			}
 
-			if (execTransition) {
-				if (delay <= 0) {
+			if (execGammaTransition) {
+				if (GAMMA_TRANSITION_TIME <= 0) {
 					client.options.gamma().set(targetGamma);
-					execTransition = false;
+					execGammaTransition = false;
 				} else {
-					double newGamma = client.options.gamma().get() + stepSize;
-					newGamma = Math.max(0.0, Math.min(maxGamma, newGamma));
-					client.options.gamma().set(newGamma);
-					delay--;
+					client.options.gamma().set(Mth.clamp(client.options.gamma().get() + ((targetGamma - client.options.gamma().get()) / GAMMA_TRANSITION_TIME), MIN_GAMMA, MAX_GAMMA));
+					GAMMA_TRANSITION_TIME--;
 				}
 			}
+		});
+	}
 
-			wasBrightnessAuraKeyPressed = brightnessAuraKey.isDown();
+	public static boolean isNightVisionEnabled;
+
+	private void registerNightVisionKey() {
+		KeyBindingHelper.registerKeyBinding(nightVisionKey);
+
+		ClientTickEvents.END_CLIENT_TICK.register(client -> {
+			if (nightVisionKey.consumeClick()) {
+				isNightVisionEnabled = !isNightVisionEnabled;
+			}
 		});
 	}
 }
