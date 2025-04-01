@@ -43,6 +43,10 @@ processResources {
 	}
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/brightnessaura.accesswidener")
+}
+
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 21
 }
