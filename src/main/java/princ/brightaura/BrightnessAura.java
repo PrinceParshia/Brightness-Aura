@@ -78,4 +78,12 @@ public class BrightnessAura implements ClientModInitializer {
 			}
 		});
 	}
+
+	public enum UnitDouble implements OptionInstance.SliderableValueSet {
+		INSTANCE;
+
+		@Override
+		public Optional<Double> validateValue(Double double_) {
+			return double_ >= (double) 0.0F && double_ <= (double) 15.0F ? Optional.of(double_) : Optional.empty();
+		}
 }
