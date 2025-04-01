@@ -44,7 +44,7 @@ processResources {
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/brightnessaura.accesswidener")
+	accessWidenerPath = file("src/main/resources/brightness-aura.accesswidener")
 }
 
 tasks.withType(JavaCompile).configureEach {
