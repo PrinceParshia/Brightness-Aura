@@ -101,4 +101,5 @@ public class BrightnessAura implements ClientModInitializer {
 		public Codec<Double> codec() {
 			return Codec.withAlternative(Codec.doubleRange((MIN_GAMMA, MAX_GAMMA), Codec.BOOL, (boolean_) -> boolean_ ? MAX_GAMMA : MIN_GAMMA);
 		}
+	}
 }
