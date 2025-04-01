@@ -34,7 +34,7 @@ public class BrightnessAura implements ClientModInitializer {
 		registerNightVisionKey();
 	}
 
-	public static final double MAX_GAMMA = 15.0, MIN_GAMMA = 0.0;
+	public static final double MIN_GAMMA = 0.0, MAX_GAMMA = 15.0;
 	public static final double GAMMA_SLIDER_INTERVAL = 0.01;
 	private final int DEFAULT_GAMMA_TRANSITION_TIME = 20;
 	private int GAMMA_TRANSITION_TIME;
@@ -84,6 +84,6 @@ public class BrightnessAura implements ClientModInitializer {
 
 		@Override
 		public Optional<Double> validateValue(Double double_) {
-			return double_ >= (double) 0.0F && double_ <= (double) 15.0F ? Optional.of(double_) : Optional.empty();
+			return double_ >= MIN_GAMMA && double_ <= MAX_GAMMA ? Optional.of(double_) : Optional.empty();
 		}
 }
