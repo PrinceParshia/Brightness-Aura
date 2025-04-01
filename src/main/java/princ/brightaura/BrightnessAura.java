@@ -86,4 +86,19 @@ public class BrightnessAura implements ClientModInitializer {
 		public Optional<Double> validateValue(Double double_) {
 			return double_ >= MIN_GAMMA && double_ <= MAX_GAMMA ? Optional.of(double_) : Optional.empty();
 		}
+
+		@Override
+		public Double toSliderValue(Double double_) {
+			return double_ / MAX_GAMMA;
+		}
+
+		@Override
+		public Double fromSliderValue(double d) {
+			return d * MAX_GAMMA;
+		}
+
+		@Override
+		public Codec<Double> codec() {
+			return Codec.withAlternative(Codec.doubleRange((MIN_GAMMA, MAX_GAMMA), Codec.BOOL, (boolean_) -> boolean_ ? MAX_GAMMA : MIN_GAMMA);
+		}
 }
