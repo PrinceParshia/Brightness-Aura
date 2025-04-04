@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import princ.brightaura.BrightnessAura;
 
-@SuppressWarnings("all")
+@Pseudo
 //@Mixin(SliderControl.class)
 public class SliderControlMixin {
 //    @Mutable
