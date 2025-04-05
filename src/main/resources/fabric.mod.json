@@ -3,7 +3,7 @@
 	"id": "brightness-aura",
 	"version": "${version}",
 	"name": "Brightness Aura",
-	"description": "Provides a client-side night vision effect for better visibility in dark areas, enhancing the Minecraft experience without requiring potions.",
+	"description": "Allows the player to have max 1500% brightness instead of vanilla 100%, eliminating the darkness.",
 	"authors": [
 		"PrinceParshia"
 	],

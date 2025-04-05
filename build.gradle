@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.9-SNAPSHOT'
+	id 'fabric-loom' version '1.10-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -27,8 +27,7 @@ dependencies {
 	// mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	// modImplementation "maven.modrinth:gamma-utils:2.2.2"
-	// modImplementation "maven.modrinth:sodium:mc1.21.4-0.6.10-fabric"
+	modImplementation "maven.modrinth:sodium:mc1.21.5-0.6.13-fabric"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
