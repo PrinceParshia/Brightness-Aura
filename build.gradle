@@ -21,6 +21,10 @@ repositories {
 	}
 }
 
+loom {
+	accessWidenerPath = file("src/main/resources/brightness-aura.accesswidener")
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -28,10 +32,10 @@ dependencies {
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "maven.modrinth:sodium:mc1.21.5-0.6.13-fabric"
+	//modImplementation "maven.modrinth:princ:1.0.0"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
 }
 
 processResources {
@@ -40,10 +44,6 @@ processResources {
 	filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}
-}
-
-loom {
-	accessWidenerPath = file("src/main/resources/brightness-aura.accesswidener")
 }
 
 tasks.withType(JavaCompile).configureEach {

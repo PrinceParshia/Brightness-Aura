@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.OptionInstance.SliderableValueSet;
+import net.minecraft.util.Mth;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Optional;
@@ -76,7 +77,7 @@ public class BrightnessAura implements ClientModInitializer {
 
 		@Override
 		public Double fromSliderValue(double d) {
-			return (Math.floor((d * MAX_GAMMA) / GAMMA_SLIDER_INTERVAL)) * GAMMA_SLIDER_INTERVAL;
+			return Mth.floor(((d * MAX_GAMMA) + GAMMA_SLIDER_INTERVAL / 2.0) / GAMMA_SLIDER_INTERVAL) * GAMMA_SLIDER_INTERVAL;
 		}
 
 		@Override
@@ -85,4 +86,3 @@ public class BrightnessAura implements ClientModInitializer {
 		}
 	}
 }
-

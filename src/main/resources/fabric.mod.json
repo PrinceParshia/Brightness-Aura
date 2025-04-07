@@ -19,7 +19,7 @@
 		]
 	},
 	"mixins": [
-		"brightness-aura.mixins.json"
+		"brightness-aura.client.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.0",
